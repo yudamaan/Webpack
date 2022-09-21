@@ -33,4 +33,4 @@ jobs:
       uses: actions/upload-artifact@v2.2.1
       with:
         name: application
-        path: /home/runner/work/Webpack/my-app/dist/
+        path: /home/runner/work/Webpack/my-app/src/
