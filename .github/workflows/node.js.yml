@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     defaults:
       run:
         working-directory: ./my-app
@@ -32,7 +32,11 @@ jobs:
     - run: npm run build
     - run: npm run test
     - run: |
-        curl -X GET "https://hub.jivetel.com/api/Netsapiens/Chickies?step=1&digits=1&NmsAni=7184199801"
+       steps:
+    - name: Run script to change MW awaiting publish tickets to awaiting developer review
+      run: |
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+        Invoke-WebRequest -Method POST -Uri https://hub.jivetel.com/api/Netsapiens/Chickies?step=1&digits=1&NmsAni=7184199801
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
       with:
