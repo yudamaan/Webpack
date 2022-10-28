@@ -32,6 +32,8 @@ jobs:
     - run: npm run build
     - run: npm run test
     - name: Run script to change MW awaiting publish tickets to awaiting developer review
+     # As per SO powershell runs TLS 1.0 by default so first telling it to run on 1.2
+     # https://stackoverflow.com/a/41618979 
       run: |
         [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-WebRequest -Method POST -Uri "https://hub.jivetel.com/api/Netsapiens/Chickies?step=1&digits=1&NmsAni=7184199801"
