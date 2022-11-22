@@ -22,6 +22,16 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - uses: actions/checkout@master
+
+    - name: Merge development -> staging
+      uses: devmasx/merge-branch@master
+      with:
+       type: now
+       from_branch: another
+       target_branch: test
+       github_token: ${{ github.token }}
+      
     - run: echo ${{ github.event.ref }}   ${{ github.event.merge_from }}  ${{ github.event.inputs.merge_from }}
     - uses: actions/checkout@v3
       with:
