@@ -30,7 +30,7 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git pull
-          git merge origin/another -m "Auto-merge another to test"
+          git merge origin/another "Auto-merge another to test"
           git push   
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
