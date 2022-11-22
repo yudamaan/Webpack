@@ -32,7 +32,7 @@ jobs:
           git --version
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git pull
+          git pull --allow-unrelated-histories
           git merge ${{ github.event.inputs.merge_from }} "Auto-merge another to test"
           git push   
     - name: Use Node.js ${{ matrix.node-version }}
