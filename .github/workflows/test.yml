@@ -39,8 +39,6 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git branch --show-current
-          git checkout refs/heads/main
-          git branch --show-current
           ##git pull --allow-unrelated-histories
           git merge ${{ github.event.inputs.merge_from }} "Auto-merge another to test"
           git push   
