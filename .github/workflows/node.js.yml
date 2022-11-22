@@ -11,7 +11,7 @@ on:
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ./my-app
@@ -22,8 +22,10 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo ${{ github.event.inputs.ref }}  
+    - run: echo ${{ github.event.ref }}  
     - uses: actions/checkout@v3
+      with:
+       ref: ${{ github.event.ref }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
@@ -32,12 +34,6 @@ jobs:
     - run: npm ci
     - run: npm run build
     - run: npm run test
-    - name: Run script to change MW awaiting publish tickets to awaiting developer review
-     # As per SO powershell runs TLS 1.0 by default so first telling it to run on 1.2
-     # https://stackoverflow.com/a/41618979 
-      run: |
-        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-        Invoke-WebRequest -Method POST -Uri "https://hub.jivetel.com/api/Netsapiens/Chickies?step=1&digits=1&NmsAni=7184199801"
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.1
       with:
