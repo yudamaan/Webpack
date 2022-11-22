@@ -19,7 +19,7 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - run: echo ${{ github.event.ref }}  
+    - run: echo ${{ github.event.ref }}   ${{ github.event.merge_from }} 
     - uses: actions/checkout@v3
       with:
        ref: ${{ github.event.ref }}
@@ -30,7 +30,7 @@ jobs:
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
           git pull
-          git merge origin/another "Auto-merge another to test"
+          git merge ${{ github.event.merge_from }} "Auto-merge another to test"
           git push   
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
