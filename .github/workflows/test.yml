@@ -29,7 +29,6 @@ jobs:
           git --version
           git config user.name "GitHub Actions Bot"
           git config user.email "<>"
-          git checkout test
           git pull
           git merge --no-ff another -m "Auto-merge another to test"
           git push   
