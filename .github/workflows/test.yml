@@ -19,6 +19,10 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - run: echo ${{ github.event.ref }}  
+    - uses: actions/checkout@v3
+      with:
+       ref: ${{ github.event.ref }}
     - name: Merge dev to test
       run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -28,11 +32,7 @@ jobs:
           git checkout test
           git pull
           git merge --no-ff another -m "Auto-merge another to test"
-          git push
-    - run: echo ${{ github.event.ref }}  
-    - uses: actions/checkout@v3
-      with:
-       ref: ${{ github.event.ref }}
+          git push   
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
